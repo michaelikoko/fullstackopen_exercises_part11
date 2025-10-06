@@ -1,0 +1,28 @@
+name: Deployment Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deployment_pipeline_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Check Code Style
+        run: npm run eslint
+
+      - name: Run Tests
+        run: npm run test
+
+      - name: Build Client Application
+        run: npm run build:client
